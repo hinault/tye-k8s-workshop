@@ -9,7 +9,11 @@ services:
 - name: aspnetcoreidentityserver
   project: AspNetCoreIdentityServer/AspNetCoreIdentityServer.csproj
   bindings:
-  - port: 5000
+  - name: http 
+    port: 5000
+  - name: https 
+    port: 5001
+    protocol: https
 - name: testapi
   project: TestApi/TestApi.csproj
 - name: mvcappclient
