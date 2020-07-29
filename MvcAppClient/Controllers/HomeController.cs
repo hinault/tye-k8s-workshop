@@ -8,6 +8,7 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MvcAppClient.Models;
 using Newtonsoft.Json.Linq;
@@ -18,9 +19,12 @@ namespace MvcAppClient.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public readonly IConfiguration _configuration;
+
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -50,7 +54,7 @@ namespace MvcAppClient.Controllers
 
             var client = new HttpClient();
             client.SetBearerToken(accessToken);
-            var content = await client.GetStringAsync("https://localhost:5003/secure");
+            var content = await client.GetStringAsync(_configuration.GetServiceUri("TestApi").AbsoluteUri + "/secure");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View();
