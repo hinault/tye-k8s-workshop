@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
@@ -15,6 +16,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MvcAppClient.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -53,8 +55,8 @@ namespace MvcAppClient.Controllers
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
             var client = new HttpClient();
-            client.SetBearerToken(accessToken);
-            var content = await client.GetStringAsync(_configuration.GetServiceUri("TestApi").AbsoluteUri + "secure");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var content = await client.GetStringAsync(_configuration.GetServiceUri("TestApi", "https").AbsoluteUri + "secure");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View();

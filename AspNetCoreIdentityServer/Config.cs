@@ -34,14 +34,14 @@ namespace AspNetCoreIdentityServer
                 new Client
                 {
                     ClientId = "mvcappclient",
-                    ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.Code,
+                    
+                    
                     ClientSecrets =
                     {
                        new Secret("secret".Sha256())
                      },
-                    RequireConsent = false,
-                    RequirePkce = true,
+                    
+                    AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { mvcAppURI + "signin-oidc" },
                     PostLogoutRedirectUris = { mvcAppURI + "signout-callback-oidc" },
                     
@@ -53,7 +53,7 @@ namespace AspNetCoreIdentityServer
                          "testapi"
                     },
 
-                      AllowOfflineAccess = true
+                     
                 }
 
            }

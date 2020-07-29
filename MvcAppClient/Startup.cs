@@ -39,12 +39,13 @@ namespace MvcAppClient
                 .AddOpenIdConnect("oidc", options =>
                 {
 
-                    options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer").AbsoluteUri; 
-                    options.RequireHttpsMetadata = false;
+                    options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer", "https").AbsoluteUri; 
+                    //options.RequireHttpsMetadata = false;
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
                     options.ClientId = "mvcappclient";
                     options.SaveTokens = true;
+                    options.Scope.Add("testapi");
                 });
 
 
@@ -68,9 +69,11 @@ namespace MvcAppClient
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
-            app.UseAuthentication();
+            
 
             app.UseEndpoints(endpoints =>
             {

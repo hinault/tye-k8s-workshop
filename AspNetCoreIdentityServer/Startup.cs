@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.IdentityModel.Tokens;
 
 namespace AspNetCoreIdentityServer
 {
@@ -33,8 +34,29 @@ namespace AspNetCoreIdentityServer
                   .AddDeveloperSigningCredential()
                   .AddInMemoryIdentityResources(Config.GetIdentityResources())
                    .AddInMemoryApiResources(Config.GetApiResources())
-                  .AddInMemoryClients(Config.GetClients(Configuration.GetServiceUri("MvcAppClient").AbsoluteUri))
+                  .AddInMemoryClients(Config.GetClients(Configuration.GetServiceUri("MvcAppClient", "https").AbsoluteUri))
                   .AddTestUsers(Config.GetUsers());
+
+            services.AddAuthentication()
+                 .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
+                 {
+                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+                     options.SaveTokens = true;
+
+                     options.Authority = "https://demo.identityserver.io/";
+                     options.ClientId = "interactive.confidential";
+                     options.ClientSecret = "secret";
+                     options.ResponseType = "code";
+
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         NameClaimType = "name",
+                         RoleClaimType = "role"
+                     };
+                 });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
