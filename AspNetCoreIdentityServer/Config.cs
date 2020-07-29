@@ -10,7 +10,7 @@ namespace AspNetCoreIdentityServer
     public class Config
     {
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(string mvcAppURI)
         {
             return new List<Client>
             {
@@ -42,8 +42,8 @@ namespace AspNetCoreIdentityServer
                      },
                     RequireConsent = false,
                     RequirePkce = true,
-                    RedirectUris = { "https://localhost:5005/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:5005/signout-callback-oidc" },
+                    RedirectUris = { mvcAppURI + "/signin-oidc" },
+                    PostLogoutRedirectUris = { mvcAppURI + "/signout-callback-oidc" },
                     
 
                     AllowedScopes =

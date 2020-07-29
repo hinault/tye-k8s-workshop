@@ -39,7 +39,7 @@ namespace MvcAppClient
                 .AddOpenIdConnect("oidc", options =>
                 {
 
-                    options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer").AbsoluteUri; // "https://localhost:5001";
+                    options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer","https").AbsoluteUri; 
                     options.RequireHttpsMetadata = false;
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
