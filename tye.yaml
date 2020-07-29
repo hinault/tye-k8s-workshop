@@ -8,28 +8,7 @@ name: identityservertuto
 services:
 - name: aspnetcoreidentityserver
   project: AspNetCoreIdentityServer/AspNetCoreIdentityServer.csproj
-  bindings:
-  - name: http 
-    port: 5000
-    protocol: http
-  - name: https 
-    port: 5001
-    protocol: https
 - name: testapi
   project: TestApi/TestApi.csproj
-    bindings:
-  - name: http 
-    port: 5002
-    protocol: http
-  - name: https 
-    port: 5003
-    protocol: https
 - name: mvcappclient
   project: MvcAppClient/MvcAppClient.csproj
-    bindings:
-  - name: http 
-    port: 5004
-    protocol: http
-  - name: https 
-    port: 5005
-    protocol: https

@@ -42,8 +42,8 @@ namespace AspNetCoreIdentityServer
                      },
                     RequireConsent = false,
                     RequirePkce = true,
-                    RedirectUris = { mvcAppURI + "/signin-oidc" },
-                    PostLogoutRedirectUris = { mvcAppURI + "/signout-callback-oidc" },
+                    RedirectUris = { mvcAppURI + "signin-oidc" },
+                    PostLogoutRedirectUris = { mvcAppURI + "signout-callback-oidc" },
                     
 
                     AllowedScopes =
