@@ -56,7 +56,7 @@ namespace MvcAppClient.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync(_configuration.GetServiceUri("testapi").AbsoluteUri + "secure");
+            var content = await client.GetStringAsync(_configuration.GetValue<string>("Service1") + "secure");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View();
