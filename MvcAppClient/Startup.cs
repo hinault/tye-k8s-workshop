@@ -48,7 +48,10 @@ namespace MvcAppClient
                     options.Scope.Add("testapi");
                 });
 
-
+            services.AddHttpClient<WeatherClient>(client =>
+            {
+                client.BaseAddress = new Uri(Configuration.GetValue<string>("Service2"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
