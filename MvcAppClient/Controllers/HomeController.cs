@@ -62,6 +62,8 @@ namespace MvcAppClient.Controllers
             return View();
         }
 
+
+
         
 
         public IActionResult Privacy()
