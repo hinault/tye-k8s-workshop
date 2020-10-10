@@ -39,8 +39,8 @@ namespace MvcAppClient
                 .AddOpenIdConnect("oidc", options =>
                 {
 
-                    options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer", "https").AbsoluteUri; 
-                    //options.RequireHttpsMetadata = false;
+                    options.Authority = Configuration.GetServiceUri("aspnetcoreidentityserver").AbsoluteUri; 
+                    options.RequireHttpsMetadata = false;
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
                     options.ClientId = "mvcappclient";
@@ -64,7 +64,7 @@ namespace MvcAppClient
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -79,8 +79,8 @@ namespace MvcAppClient
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}")
-                .RequireAuthorization();
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //.RequireAuthorization();
             });
         }
     }

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MvcAppClient.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -56,7 +56,7 @@ namespace MvcAppClient.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync(_configuration.GetServiceUri("TestApi", "https").AbsoluteUri + "secure");
+            var content = await client.GetStringAsync(_configuration.GetServiceUri("testapi").AbsoluteUri + "secure");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View();

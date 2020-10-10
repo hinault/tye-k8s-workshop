@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace TestApi
+namespace Service2
 {
     public class Startup
     {
@@ -26,15 +26,6 @@ namespace TestApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddAuthentication("Bearer")
-             .AddJwtBearer("Bearer", options =>
-             {
-                 options.Authority = Configuration.GetServiceUri("AspNetCoreIdentityServer").AbsoluteUri;
-                 options.RequireHttpsMetadata = false;
-
-                 options.Audience = "testapi";
-             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,12 +36,11 @@ namespace TestApi
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.UseHttpsRedirection();
+
             app.UseRouting();
 
-            app.UseAuthentication();
-
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {
