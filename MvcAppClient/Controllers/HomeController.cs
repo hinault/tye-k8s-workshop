@@ -62,9 +62,12 @@ namespace MvcAppClient.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Weather([FromServices] WeatherClient client)
+        {
+            return View(await client.GetWeatherAsync());
+        }
 
 
-        
 
         public IActionResult Privacy()
         {
