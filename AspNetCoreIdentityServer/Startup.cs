@@ -34,7 +34,7 @@ namespace AspNetCoreIdentityServer
                   .AddDeveloperSigningCredential()
                   .AddInMemoryIdentityResources(Config.GetIdentityResources())
                    .AddInMemoryApiResources(Config.GetApiResources())
-                  .AddInMemoryClients(Config.GetClients(Configuration.GetServiceUri("MvcAppClient").AbsoluteUri))
+                  .AddInMemoryClients(Config.GetClients(Configuration.GetValue<string>("MvcAppClient")))
                   .AddTestUsers(Config.GetUsers());
 
             services.AddAuthentication()
