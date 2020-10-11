@@ -39,7 +39,7 @@ namespace MvcAppClient
                 .AddOpenIdConnect("oidc", options =>
                 {
 
-                    options.Authority = Configuration.GetValue<string>("AspNetCoreIdentityServer"); 
+                    options.Authority = Configuration.GetServiceUri("aspnetcoreidentityserver", "https").AbsoluteUri; 
                     options.RequireHttpsMetadata = false;
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
@@ -50,7 +50,7 @@ namespace MvcAppClient
 
             services.AddHttpClient<WeatherClient>(client =>
             {
-                client.BaseAddress = new Uri(Configuration.GetValue<string>("Service2"));
+                client.BaseAddress = Configuration.GetServiceUri("service2");
             });
         }
 

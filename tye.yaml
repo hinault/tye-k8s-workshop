@@ -1,0 +1,16 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: identityservertuto
+services:
+- name: aspnetcoreidentityserver
+  project: AspNetCoreIdentityServer/AspNetCoreIdentityServer.csproj
+- name: service1
+  project: TestApi/Service1.csproj
+- name: mvcappclient
+  project: MvcAppClient/MvcAppClient.csproj
+- name: service2
+  project: Service2/Service2.csproj
