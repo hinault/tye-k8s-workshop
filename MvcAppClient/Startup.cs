@@ -50,7 +50,7 @@ namespace MvcAppClient
 
             services.AddHttpClient<WeatherClient>(client =>
             {
-                client.BaseAddress = Configuration.GetServiceUri("service2");
+                client.BaseAddress = Configuration.GetServiceUri("service2","https");
             });
         }
 

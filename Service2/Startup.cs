@@ -26,6 +26,11 @@ namespace Service2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddStackExchangeRedisCache(o =>
+            {
+                o.Configuration = Configuration.GetConnectionString("redis");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
