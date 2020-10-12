@@ -30,7 +30,7 @@ namespace TestApi
             services.AddAuthentication("Bearer")
              .AddJwtBearer("Bearer", options =>
              {
-                 options.Authority = options.Authority = Configuration.GetServiceUri("aspnetcoreidentityserver","https").AbsoluteUri;
+                 options.Authority = options.Authority = Configuration.GetServiceUri("aspnetcoreidentityserver").AbsoluteUri;
                  options.RequireHttpsMetadata = false;
 
                  options.Audience = "testapi";
